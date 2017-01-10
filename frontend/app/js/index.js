@@ -1,4 +1,4 @@
-import _ from './styles/style.css';
+import _ from '../styles/style.css';
 
 import Vue from 'vue'
 

@@ -7,7 +7,7 @@ let extractCSS = new extractText('styles/style.css');
 module.exports = {
   context: __dirname,
   entry: {
-    app: path.resolve(__dirname, 'app/index.js'),
+    app: path.resolve(__dirname, 'app/js/index.js'),
     vendor: ['vue']
   },
   output: {
