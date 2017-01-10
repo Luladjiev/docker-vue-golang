@@ -1,5 +1,8 @@
 let webpack = require('webpack');
 let path = require('path');
+let extractText = require('extract-text-webpack-plugin');
+
+let extractCSS = new extractText('styles/style.css');
 
 module.exports = {
   context: __dirname,
@@ -9,7 +12,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js',
+    filename: 'js/[name].js',
     publicPath: '/dist/'
   },
   module: {
@@ -17,6 +20,12 @@ module.exports = {
       test: /\.js$/,
       exclude: path.resolve(__dirname, 'node_modules'),
       loader: 'babel-loader'
+    }, {
+      test: /\.css$/,
+      loader: extractCSS.extract({
+        fallBackLoader: 'style-loader',
+        loader: 'css-loader'
+      })
     }]
   },
   resolve: {
@@ -30,6 +39,7 @@ module.exports = {
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor']
-    })
+    }),
+    extractCSS
   ]
 }
